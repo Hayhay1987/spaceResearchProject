@@ -1,5 +1,11 @@
 var checkedS, checkedH, checkedM;
 
+
+function preload() {
+  csound = loadSound("correct.mp3");
+  isound = loadSound("incorrect.mp3");
+  wsound = loadSound("win.wav")
+}
 function setup() {
   createCanvas(1100, 1100)
   welcomeMessage = createElement("h1", "The Jupiter Quiz")
@@ -107,8 +113,8 @@ function setup() {
   q3NextButton.position(-500, -500);
   q3NextButton.mousePressed(q3Next)
 
-  q4Message = createElement("h2", "What is the average surface temperature of Jupiter?")
-  q4Message.position(-500, -500);
+  question4Message = createElement("h2", "What is the average temperature of Jupiter?")
+  question4Message.position(-500, -500);
 
   q4a1 = createInput();
   q4a1.position(-500, -500);
@@ -119,6 +125,13 @@ function setup() {
 
   q4aB = createButton("Submit answer");
   q4aB.position(-500, -500);
+  q4aB.mousePressed(q4ca)
+
+  q4iMessage = createElement("h2", "Question 4 incorrect!");
+  q4iMessage.position(-500, -500);
+
+  winMessage = createElement("h2", "Good job, you won!")
+  winMessage.position(-500, -500);
 }
 
 function draw() {
@@ -145,6 +158,7 @@ function q1i() {
   question1Message.position(-500, -500);
   q1iMessage.position(0, 0);
   bthsButton.position(0, 50);
+  isound.play();
 }
 
 function bths() {
@@ -164,7 +178,9 @@ function bths() {
   q3aM.value('');
   q3S = '';
   q3aS.value('');
-}
+  q4A = '';
+  q4a1.value('');
+}l
 
 function q1c() {
   question1Message.position(-500, -500);
@@ -174,6 +190,7 @@ function q1c() {
   q1a4.position(-500, -500);
   q1cMessage.position(0, 0);
   q1NextButton.position(0, 50)
+  csound.play();
 }
 
 function q1Next() {
@@ -206,6 +223,7 @@ function q2c() {
   q2a1B.position(-500, -500);
   q2cMessage.position(0, 0);
   q2NextButton.position(0, 50);
+  csound.play();
 }
 
 function q2i() {
@@ -215,6 +233,7 @@ function q2i() {
   q2a1B.position(-500, -500);
   q2iMessage.position(0, 0);
   bthsButton.position(0, 50);
+  isound.play();
 }
 
 function q2Next() {
@@ -279,6 +298,7 @@ function q3c() {
     checkedH = 0;
     checkedM = 0;
     checkedS = 0;
+    csound.play();
 
 }
 
@@ -296,17 +316,46 @@ function q3i() {
   checkedH = 0;
   checkedM = 0;
   checkedS = 0;
+  isound.play();
 }
 
 function q3Next() {
   q3cMessage.position(-500, -500);
   q3NextButton.position(-500, -500);
-  q4Message.position(0, 0);
+  question4Message.position(0, 0);
   q4a1.position(0, 50);
   q4a1M.position(150, 30);
+  
 }
 
 function q4ea() {
   q4A = this.value();
   q4aB.position(0, 100);
+}
+
+function q4ca() {
+  if (q4A == '-150') {
+    q4c();
+  }  
+
+  else {
+    q4i();
+  }
+}
+
+function q4i() {
+  question4Message.position(-500, -500);
+  q4a1.position(-500, -500);
+  q4a1M.position(-500, -500);
+  q4aB.position(-500, -500);
+  isound.play();
+}
+
+function q4c() {
+  question4Message.position(-500, -500);
+  q4a1.position(-500, -500);
+  q4a1M.position(-500, -500);
+  q4aB.position(-500, -500);
+  winMessage.position(0, 0);
+  wsound.play();
 }
